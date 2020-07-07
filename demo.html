@@ -1,0 +1,79 @@
+<html>
+<head>
+<meta charset="utf-8">
+<title>clicaptcha在线演示</title>
+<link rel="stylesheet" href="css/captcha.css">
+<link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+<div id="login">
+	<form method="post" id="form" name="form">
+		<div class="title"><b>方案一：</b></div>
+		<div class="row">
+			<div id="imgcaptcha" ></div>
+			<button type="button" id="imgsub">验证</button>
+		</div>
+	</form>
+	<form method="post" id="form" name="form">
+			<div class="clicaptcha-title"><b>方案二：</b></div>
+		<div class="row">
+			<button type="button" id="sub">点此进行验证</button>
+		</div>
+	</form>
+	<form method="post" id="form" name="form">
+		<div class="title"><b>方案三.点击弹出：</b></div>
+		<div class="row">
+			<button type="button" id="sub_sli">点此进行验证</button>
+		</div>
+	</form>
+</div>
+<div id='sli-captcha'>
+	<div id='slicaptcha'></div>
+</div>
+<div id='sli-mask'></div>
+</body>
+<script src="../captcha/clicaptcha/captcha.js"></script>
+<script>
+var captcha = window['_captcha'];
+/* document.getElementById("sub").onclick = function(e) {
+	cli.clicaptcha({
+		callback: function(tip){console.log(tip)}
+	});
+}
+imgcaptcha.init('imgcaptcha', {
+	callback: function(tip){console.log(tip)}
+});
+document.getElementById("imgsub").onclick = function(e) {
+	imgcaptcha.verify();
+} */
+captcha.init('click',{
+	callback: function() {
+		document.getElementById("sub").innerHTML = "验证成功";
+	}
+},'sub');
+captcha.init('slider',{
+
+},'slicaptcha');
+captcha.init('image',{
+
+},'imgcaptcha');
+document.getElementById("imgsub").onclick = function(e) {
+	captcha.verify();
+}
+
+document.getElementById("sub_sli").onclick = function(e) {
+	document.getElementById("sli-captcha").style.display = 'block';
+	document.getElementById("sli-mask").style.display = 'block';
+	captcha.init('slider',{
+
+	},'slicaptcha');
+}    
+document.getElementById("sli-mask").onclick = function(e) {
+	document.getElementById("sli-captcha").style.display = 'none';
+	document.getElementById("sli-mask").style.display = 'none';
+}
+
+</script>
+
+</html>
